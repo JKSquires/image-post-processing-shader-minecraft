@@ -15,7 +15,7 @@ There are a few ways to do "build" a Minecraft resource pack, and here are two:
 
 ### Resource Pack Directory
 
-1. Copy all everything in the `src` directory into an empty directory in the `.minecraft/resourcepacks` directory (if you don't know where that is, [see this](https://minecraft.wiki/w/.minecraft))
+1. Copy all everything in the `src` directory into an empty directory in the `.minecraft/resourcepacks` directory (if you don't know where that is, [see this](https://minecraft.wiki/w/.minecraft)).
 2. In Minecraft 1.21.4, go to the Resource Packs menu in the Options menu.
 3. Load the resource pack that has the same name as the directory you copied everything into.
 4. Make sure the Graphics setting (under Video Settings in the Options menu) is set to *Fabulous!*.
