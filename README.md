@@ -1,4 +1,6 @@
 # image-post-processing-shader-minecraft
+![screenshot](screenshot.png)
+
 Uses Minecraft 1.21.4 as a base to run the shaders.
 
 I wanted to make this to learn to be able to practice writing GLSL, practice creating Minecraft shaders, and test out different post-processing filters/effects on a given image (the image I used can be found as `assets/minecraft/textures/effect/3.png`).
