@@ -1,0 +1,187 @@
+{
+    "targets" : {
+        "swap": {},
+        "img": {},
+        "rotation": {},
+        "kuwahara": {},
+        "sobel": {},
+        "greyscale": {}
+    },
+    "passes": [
+        {
+            "program": "minecraft:post/image",
+            "inputs": [
+				{
+					"sampler_name": "Diffuse",
+                    "target": "minecraft:main"
+				},
+                {
+                    "sampler_name": "Img",
+					"location": "minecraft:3",
+					"width": 4,
+					"height": 4,
+					"bilinear": true
+                }
+            ],
+            "output": "img"
+        },
+		{
+            "program": "minecraft:post/rotation",
+            "inputs": [
+				{
+					"sampler_name": "Diffuse",
+                    "target": "img"
+				}
+            ],
+            "output": "rotation",
+            "uniforms": [
+                {
+                    "name": "Angle",
+                    "values": [ 30.0 ]
+                }
+            ]
+        },
+		{
+            "program": "minecraft:post/kuwahara",
+            "inputs": [
+				{
+					"sampler_name": "Diffuse",
+                    "target": "img"
+				}
+            ],
+            "output": "kuwahara"
+        },
+		{
+            "program": "minecraft:post/sobel",
+            "inputs": [
+				{
+					"sampler_name": "Diffuse",
+                    "target": "img"
+				}
+            ],
+            "output": "sobel"
+        },
+		{
+            "program": "minecraft:post/greyscale",
+            "inputs": [
+				{
+					"sampler_name": "Diffuse",
+                    "target": "img"
+				}
+            ],
+            "output": "greyscale"
+        },
+		{
+            "program": "minecraft:post/spider",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "sobel"
+                },
+                {
+                    "sampler_name": "Blur",
+                    "target": "minecraft:main"
+                }
+            ],
+            "output": "swap",
+            "uniforms": [
+                {
+                    "name": "InScale",
+                    "values": [ 2.0, 2.0 ]
+                },
+                {
+                    "name": "InOffset",
+                    "values": [ 0.0, -1.0 ]
+                },
+                {
+                    "name": "Vignette",
+                    "values": [ 0.0001, 0.0001, 0.9999, 0.9999 ]
+                }
+            ]
+        },
+		{
+            "program": "minecraft:post/spider",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "kuwahara"
+                },
+                {
+                    "sampler_name": "Blur",
+                    "target": "swap"
+                }
+            ],
+            "output": "minecraft:main",
+            "uniforms": [
+                {
+                    "name": "InScale",
+                    "values": [ 2.0, 2.0 ]
+                },
+                {
+                    "name": "InOffset",
+                    "values": [ -1.0, -1.0 ]
+                },
+                {
+                    "name": "Vignette",
+                    "values": [ 0.0001, 0.0001, 0.9999, 0.9999 ]
+                }
+            ]
+        },
+		{
+            "program": "minecraft:post/spider",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "rotation"
+                },
+                {
+                    "sampler_name": "Blur",
+                    "target": "minecraft:main"
+                }
+            ],
+            "output": "swap",
+            "uniforms": [
+                {
+                    "name": "InScale",
+                    "values": [ 2.0, 2.0 ]
+                },
+                {
+                    "name": "InOffset",
+                    "values": [ 0.0, 0.0 ]
+                },
+                {
+                    "name": "Vignette",
+                    "values": [ 0.0001, 0.0001, 0.9999, 0.9999 ]
+                }
+            ]
+        },
+		{
+            "program": "minecraft:post/spider",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "greyscale"
+                },
+                {
+                    "sampler_name": "Blur",
+                    "target": "swap"
+                }
+            ],
+            "output": "minecraft:main",
+            "uniforms": [
+                {
+                    "name": "InScale",
+                    "values": [ 2.0, 2.0 ]
+                },
+                {
+                    "name": "InOffset",
+                    "values": [ -1.0, 0.0 ]
+                },
+                {
+                    "name": "Vignette",
+                    "values": [ 0.0001, 0.0001, 0.9999, 0.9999 ]
+                }
+            ]
+        }
+    ]
+}
